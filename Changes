@@ -1,6 +1,8 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+
+0.002     2014-04-01T06:36:07EST+1100
   * Revise test prerequisites.
 
 0.001     2014-03-31T00:26:03EST+1100
