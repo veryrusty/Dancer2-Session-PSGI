@@ -2,6 +2,8 @@
 
 Dancer2::Session::PSGI - Dancer2 session storage via Plack::Middleware::Session
 
+[![Build Status](https://travis-ci.org/veryrusty/Dancer2-Session-PSGI.png?branch=master)](https://travis-ci.org/veryrusty/Dancer2-Session-PSGI)
+
 # VERSION
 
 version 0.001
