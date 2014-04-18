@@ -4,7 +4,7 @@ Dancer2::Session::PSGI - Dancer2 session storage via Plack::Middleware::Session
 
 # VERSION
 
-version 0.003
+version 0.004
 
 # SYNOPSIS
 
