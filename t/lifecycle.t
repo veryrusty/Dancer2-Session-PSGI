@@ -13,6 +13,7 @@ use HTTP::Cookies;
     # Force PSGI server for Dancer2
     BEGIN { $ENV{DANCER_APPHANDLER} = 'PSGI' }
     use Dancer2;
+    use Dancer2::Core::Time;
 
     setting( session => 'PSGI' );
 
@@ -28,6 +29,12 @@ use HTTP::Cookies;
     get '/delete' => sub {
         context->destroy_session;
         return 'destroyed';
+    };
+
+    get '/expires' => sub {
+        my $session = session;
+        $session->expires(10);
+        return $session->expires;
     };
 }
 
@@ -52,6 +59,14 @@ subtest 'Basic session set then retrieve' => sub {
 subtest 'session destruction' => sub {
     my $res = get_request('/delete');
     is $jar->as_string, '', "destroying session expired cookie";
+};
+
+subtest 'modify cookie expiry' => sub {
+    get_request("/set/expires");
+    my $res = get_request('/get');
+    unlike $jar->as_string, qr/expires/, "session cookie";
+    $res = get_request('/expires');
+    like $jar->as_string, qr/expires/, "cookie now has expiry";
 };
 
 done_testing();
