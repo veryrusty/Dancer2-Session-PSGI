@@ -1,6 +1,7 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+  * Ensure changes session expiry are passed back to the psgi env.
 
 0.004     2014-04-18T20:19:40EST+1000
   * Update test prerequisites: Tests depend on Plack, as Plack::Test does
