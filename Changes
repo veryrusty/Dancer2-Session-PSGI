@@ -2,6 +2,9 @@ Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
 
+0.006     2014-06-23T11:07:19EST+1000
+  * Updating metadata. No functional changes.
+
 0.005     2014-06-23T10:17:37EST+1000
   * Ensure changes session expiry are passed back to the psgi env.
 
