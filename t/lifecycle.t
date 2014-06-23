@@ -13,7 +13,6 @@ use HTTP::Cookies;
     # Force PSGI server for Dancer2
     BEGIN { $ENV{DANCER_APPHANDLER} = 'PSGI' }
     use Dancer2;
-    use Dancer2::Core::Time;
 
     setting( session => 'PSGI' );
 
