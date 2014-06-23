@@ -4,7 +4,7 @@ Dancer2::Session::PSGI - Dancer2 session storage via Plack::Middleware::Session
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
@@ -21,20 +21,20 @@ version 0.004
 # DESCRIPTION
 
 This module implements implements a session factory for Dancer2 that uses
-[Plack::Middleware::Session](http://search.cpan.org/perldoc?Plack::Middleware::Session) for session management.
+[Plack::Middleware::Session](https://metacpan.org/pod/Plack::Middleware::Session) for session management.
 
 # CONFIGURATION
 
-The setting __session__ should be set to `PSGI` in order to use this session
+The setting **session** should be set to `PSGI` in order to use this session
 engine in a Dancer2 application.
 
 The default cookie name is `plack_session`. Refer to
-["Session\_engine" in Dancer2::Config](http://search.cpan.org/perldoc?Dancer2::Config#Session\_engine) if you need to modify this.
+["Session\_engine" in Dancer2::Config](https://metacpan.org/pod/Dancer2::Config#Session_engine) if you need to modify this.
 
 # ACKNOWLEDGEMENTS
 
-The methods required by [Dancer2::Core::Role::SessionFactory](http://search.cpan.org/perldoc?Dancer2::Core::Role::SessionFactory) were
-heavily based on [Dancer2::Session::Cookie](http://search.cpan.org/perldoc?Dancer2::Session::Cookie) by David Golden.
+The methods required by [Dancer2::Core::Role::SessionFactory](https://metacpan.org/pod/Dancer2::Core::Role::SessionFactory) were
+heavily based on [Dancer2::Session::Cookie](https://metacpan.org/pod/Dancer2::Session::Cookie) by David Golden.
 
 # AUTHOR
 

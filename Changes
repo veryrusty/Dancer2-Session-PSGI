@@ -1,6 +1,8 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+
+0.005     2014-06-23T10:17:37EST+1000
   * Ensure changes session expiry are passed back to the psgi env.
 
 0.004     2014-04-18T20:19:40EST+1000
