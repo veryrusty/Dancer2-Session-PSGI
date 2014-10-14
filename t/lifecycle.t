@@ -40,7 +40,7 @@ use HTTP::Cookies;
 my $jar = HTTP::Cookies->new;
 my $app ||= Plack::Test->create(
     builder {
-        enable "Session::Cookie";
+        enable "Session::Cookie", secret => 'only.for.testing';
         dance();
     }
 );

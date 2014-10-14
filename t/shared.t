@@ -74,7 +74,9 @@ sub make_test_app {
     my $app = shift;
     return Plack::Test->create(
         builder {
-            enable "Session::Cookie", session_key => "some.thing";
+            enable "Session::Cookie",
+                secret => 'only.for.testing',
+                session_key => "some.thing";
             $app;
         }
     );
