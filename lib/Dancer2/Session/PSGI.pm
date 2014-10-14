@@ -19,13 +19,13 @@ has '+cookie_name' => ( default => 'plack_session' );
 
 # Get middleware session hash
 sub _retrieve {
-    shift->context->request->env->{'psgix.session'};
+    shift->request->env->{'psgix.session'};
 }
 
 # Put data back/into middleware session hash
 sub _flush {
     my ( $self, $id, $data ) = @_;
-    $self->context->request->env->{'psgix.session'} = $data;
+    $self->request->env->{'psgix.session'} = $data;
 }
 
 # Middleware handles cookie expiry
@@ -45,7 +45,7 @@ sub set_cookie_header {
     my ( $self, %params ) = @_;
 
     my $session = $params{session};
-    my $options = $self->context->env->{'psgix.session.options'};
+    my $options = $self->request->env->{'psgix.session.options'};
 
     if ( my $expires = $session->expires ) {
         if ( $session->expires < time ) { # Cookie has expired.

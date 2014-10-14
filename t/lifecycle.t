@@ -26,14 +26,13 @@ use HTTP::Cookies;
     };
 
     get '/delete' => sub {
-        context->destroy_session;
+        app->destroy_session;
         return 'destroyed';
     };
 
     get '/expires' => sub {
-        my $session = session;
-        $session->expires(10);
-        return $session->expires;
+        session->expires(10);
+        return session->expires;
     };
 }
 
