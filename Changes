@@ -1,6 +1,8 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+  * Require Plack::Middleware::Session v0.23 as it is the first release
+    of Middleware::Session that requires a secret.
 
 0.007     2014-10-14T14:38:14EST+1100
   * Access to PSGI env is via engine request attr, not context.
