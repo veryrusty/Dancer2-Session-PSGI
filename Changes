@@ -1,6 +1,7 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+  * Add support for Dancer2's upcoming change_session_id method
 
 0.008     2014-10-16T08:26:41EST+1100
   * Require Plack::Middleware::Session v0.23 as it is the first release
