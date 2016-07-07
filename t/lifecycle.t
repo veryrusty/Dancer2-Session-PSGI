@@ -79,7 +79,7 @@ subtest "Change session ID" => sub {
     SKIP: {
         # Dancer2 > 0.200003
         skip "This Dancer2 version does not support change_session_id", 2
-          if $res->content ne 'unsupported';
+          if $res->content eq "unsupported";
 
         # extract SID
         $jar->scan( sub { $sid2 = $_[2] } );
