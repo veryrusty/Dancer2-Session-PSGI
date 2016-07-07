@@ -4,6 +4,8 @@ use Test::More 0.96 import => ['!pass'];    # subtests
 
 use Plack::Builder;
 use Plack::Test;
+use Plack::Middleware::Session;
+use Plack::Session::Store;
 
 use HTTP::Request::Common;
 use HTTP::Cookies;
@@ -25,6 +27,16 @@ use HTTP::Cookies;
         return session('thing');
     };
 
+    get '/change_session_id' => sub {
+        if ( app->can('change_session_id') ) {
+            # Dancer2 > 0.200003
+            app->change_session_id;
+        }
+        else {
+            return "unsupported";
+        }
+    };
+
     get '/delete' => sub {
         app->destroy_session;
         return 'destroyed';
@@ -40,18 +52,41 @@ use HTTP::Cookies;
 my $jar = HTTP::Cookies->new;
 my $app ||= Plack::Test->create(
     builder {
-        enable "Session::Cookie", secret => 'only.for.testing';
+        #enable "Session::Cookie", secret => 'only.for.testing';
+        enable 'Session';
         dance();
     }
 );
 
 ## Tests
 
+my $sid1;
 subtest 'Basic session set then retrieve' => sub {
     my $string = "boooorrrring";
     get_request("/set/$string");
     my $res = get_request('/get');
     is $res->content, $string, "Retrieved content back from session";
+
+    # extract SID
+    $jar->scan( sub { $sid1 = $_[2] } );
+    ok( $sid1, "Got SID from cookie: $sid1" );
+};
+
+my $sid2;
+subtest "Change session ID" => sub {
+    my $res = get_request("/change_session_id");
+
+    SKIP: {
+        # Dancer2 > 0.200003
+        skip "This Dancer2 version does not support change_session_id", 2
+          if $res->content ne 'unsupported';
+
+        # extract SID
+        $jar->scan( sub { $sid2 = $_[2] } );
+        ok( $sid2, "Got SID from cookie: $sid2" );
+
+        isnt $sid2, $sid1, "New session has different ID";
+    }
 };
 
 subtest 'session destruction' => sub {
@@ -77,6 +112,7 @@ sub get_request {
     my $req = HTTP::Request->new( 'GET' => "http://localhost$path" );
     $jar->add_cookie_header($req);
     my $res = $app->request($req);
+    $jar->clear;
     $jar->extract_cookies($res);
 
     return $res;
