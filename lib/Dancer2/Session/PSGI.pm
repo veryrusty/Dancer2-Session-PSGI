@@ -77,6 +77,7 @@ __END__
 
 =for Pod::Coverage method_names_here
 set_cookie_header
+change_id
 
 =encoding utf-8
 
