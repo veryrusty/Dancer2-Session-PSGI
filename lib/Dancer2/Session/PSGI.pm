@@ -28,6 +28,10 @@ sub _flush {
     $self->request->env->{'psgix.session'} = $data;
 }
 
+# Do nothing - we override change_id below but this method must exist to
+# force Dance2::Core::App::change_session_id to call our change_id method
+sub _change_id {}
+
 # Middleware handles cookie expiry
 sub _destroy { return }
 
@@ -39,6 +43,16 @@ sub _sessions { return [] }
 #-----------------------------------------#
 # Overridden methods from SessionFactory
 #-----------------------------------------#
+
+sub change_id {
+    my ( $self, %params ) = @_;
+    my $session = $params{session};
+
+    $self->execute_hook( 'engine.session.before_change_id', $session->id );
+    $self->request->env->{'psgix.session.options'}->{'change_id'} = 1;
+    # we don't know what the new session ID will be yet so make it undef
+    $self->execute_hook( 'engine.session.before_change_id', undef );
+}
 
 # Middleware sets the cookie.
 sub set_cookie_header {
@@ -63,6 +77,7 @@ __END__
 
 =for Pod::Coverage method_names_here
 set_cookie_header
+change_id
 
 =encoding utf-8
 
