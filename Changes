@@ -1,6 +1,8 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+
+0.009     2016-07-09T21:06:49AEST+1000
   * Add support for Dancer2's upcoming change_session_id method
     (Peter @SysPete Mottram)
 
