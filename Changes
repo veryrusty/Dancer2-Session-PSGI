@@ -1,6 +1,8 @@
 Revision History for Dancer2::Session::PSGI
 
 {{$NEXT}}
+
+0.010     2018-04-12T12:48:36AEST+1000
   * Consider any session ID provided by Plack::Middleware::Session
     to be considered a valid ID (using upcoming validate_id method)
     (Russell @veryrusty Jenkins)
