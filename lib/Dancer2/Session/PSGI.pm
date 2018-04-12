@@ -44,6 +44,10 @@ sub _sessions { return [] }
 # Overridden methods from SessionFactory
 #-----------------------------------------#
 
+# Plack::Middleware::Session is responsible for fetch and id generation
+# any ID passed to this engine is considered valid
+sub validate_id { 1 }
+
 sub change_id {
     my ( $self, %params ) = @_;
     my $session = $params{session};
