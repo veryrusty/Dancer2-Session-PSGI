@@ -100,7 +100,7 @@ validate_id
 
 =head1 DESCRIPTION
 
-This module implements implements a session factory for Dancer2 that uses
+This module implements a session factory for Dancer2 that uses
 L<Plack::Middleware::Session> for session management.
 
 =head1 CONFIGURATION
